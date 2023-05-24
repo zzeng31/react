@@ -1,0 +1,10 @@
+.users ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+ul li {
+  display: flex;
+  border-bottom: 1px solid black;
+  justify-content: space-between;
+}
