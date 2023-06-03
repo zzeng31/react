@@ -1,19 +1,30 @@
-import React, { useState } from "react";
-import AddUsers from "./components/Users/AddUsers";
-import UserList from "./components/Users/UserList";
-// import { Rating } from "pat-ui";
-// import Card from "./components/UI/Card";
-// import "pat-ui/index.css";
+import React, { useState } from 'react';
+
+import Login from './components/Login/Login';
+import Home from './components/Home/Home';
+import MainHeader from './components/MainHeader/MainHeader';
+
 function App() {
-  const [users, setUsers] = useState([]);
-  const addToUserList = (newUser) => {
-    setUsers((prevState) => [...prevState, newUser]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const loginHandler = (email, password) => {
+    // We should of course check email and password
+    // But it's just a dummy/ demo anyways
+    setIsLoggedIn(true);
   };
+
+  const logoutHandler = () => {
+    setIsLoggedIn(false);
+  };
+
   return (
-    <div>
-      <AddUsers addToUserList={addToUserList} />
-      {users.length > 0 && <UserList users={users} />}
-    </div>
+    <React.Fragment>
+      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+      <main>
+        {!isLoggedIn && <Login onLogin={loginHandler} />}
+        {isLoggedIn && <Home onLogout={logoutHandler} />}
+      </main>
+    </React.Fragment>
   );
 }
 
